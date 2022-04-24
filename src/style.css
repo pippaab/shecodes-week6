@@ -5,6 +5,10 @@ h1 {
   font-family: "Amatic SC", cursive;
 }
 
+h2 {
+  text-transform: capitalize;
+}
+
 .borders {
   border: 1px solid black;
   padding: 20px 50px;

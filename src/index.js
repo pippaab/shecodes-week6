@@ -1,4 +1,5 @@
 // Time //
+
 let now = new Date();
 
 let hours = now.getHours();
@@ -24,7 +25,7 @@ if (hours < 10) {
 }
 
 let time = document.querySelector("p");
-time.innerHTML = `${day} ${hours}:${minutes}`;
+time.innerHTML = `Last updated ${day} @ ${hours}:${minutes}`;
 
 // Fahrenheit Celcius //
 
@@ -55,7 +56,11 @@ let apiKey = "43517670fb49aab181a729d9e96348f2";
 function showTemperature(response) {
   console.log(response);
   let temperatureElement = document.querySelector(".rightNow");
-  temperatureElement.innerHTML = `${Math.round(response.data.main.temp)}°C`;
+  let temp = Math.round(response.data.main.temp);
+  temperatureElement.innerHTML = ` ${temp}°C;`;
+
+  let cityElement = document.querySelector("h2");
+  cityElement.innerHTML = `📍 ${response.data.name}`;
 
   let wind = document.querySelector(".wind");
   wind.innerHTML = `${Math.round(response.data.wind.speed)} m/s`;
@@ -70,9 +75,9 @@ function showTemperature(response) {
 function searchClick(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#inputCity");
-  let h2 = document.querySelector("h2");
+  let cityElement = document.querySelector("h2");
   let city = `${searchInput.value}`;
-  h2.innerHTML = `📍 ${city}`;
+  cityElement.innerHTML = `📍 ${city}`;
 
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(`${url}&appID${apiKey}`).then(showTemperature);
@@ -80,6 +85,8 @@ function searchClick(event) {
 
 let search = document.querySelector(".search-button");
 search.addEventListener("click", searchClick);
+
+// autoload
 
 function autoLoad(city) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -96,8 +103,8 @@ function showLocationTemperature(response) {
   let temp = Math.round(response.data.main.temp);
   temperatureElement.innerHTML = ` ${temp}°C;`;
 
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = `📍 ${response.data.name}`;
+  let cityElement = document.querySelector("h2");
+  cityElement.innerHTML = `📍 ${response.data.name}`;
 
   let wind = document.querySelector(".wind");
   wind.innerHTML = `${Math.round(response.data.wind.speed)} m/s`;
