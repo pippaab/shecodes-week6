@@ -30,8 +30,8 @@ p {
   font-weight: 200;
 }
 
-.fa-cloud-rain {
-  font-size: 80px;
+#weatherIcon {
+  width: 70px;
 }
 
 .todayTemp {
