@@ -133,21 +133,38 @@ changeFahrenheit.addEventListener("click", changeF);
 
 // 5 day forecast
 
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+  return days[day];
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row byDay" id="forecast">`;
   let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tues"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `          
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `          
             <div class="col-2">
-              ${day} <br />
-              <i class="fa-regular fa-sun dayEmoji"></i> <br />
-              22°C <span class="low">|  15°C </span>
+              ${formatForecastDay(forecastDay.dt)} <br />
+              <img src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png" id="weatherApp"/ >
+               <br />
+              ${Math.round(
+                forecastDay.temp.max
+              )}°C <span class="low">|  ${Math.round(
+          forecastDay.temp.min
+        )}°C </span>
             </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;

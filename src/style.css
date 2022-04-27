@@ -78,3 +78,7 @@ footer {
 .low {
   font-weight: 200;
 }
+
+#weatherApp {
+  width: 50px;
+}
