@@ -102,35 +102,6 @@ function locationClick(event) {
 let current = document.querySelector(".location-button");
 current.addEventListener("click", locationClick);
 
-// Fahrenheit Celcius //
-
-function changeC(event) {
-  event.preventDefault();
-
-  changeCelcius.classList.add("active");
-  changeFahrenheit.classList.remove("active");
-
-  let tempNow = document.querySelector(".rightNow");
-  tempNow.innerHTML = Math.round(celciusTemp);
-}
-
-function changeF(event) {
-  event.preventDefault();
-
-  changeCelcius.classList.remove("active");
-  changeFahrenheit.classList.add("active");
-
-  let tempNow = document.querySelector(".rightNow");
-  let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
-  tempNow.innerHTML = Math.round(fahrenheitTemp);
-}
-
-let changeCelcius = document.querySelector(".celcius");
-changeCelcius.addEventListener("click", changeC);
-
-let changeFahrenheit = document.querySelector(".fahrenheit");
-changeFahrenheit.addEventListener("click", changeF);
-
 // 5 day forecast
 
 function formatForecastDay(timestamp) {
